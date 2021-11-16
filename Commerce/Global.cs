@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Commerce.Global
+﻿namespace Commerce.Global
 {
     public enum Currency
     {
@@ -14,6 +8,8 @@ namespace Commerce.Global
 
     public class Increment
     {
-        public static int Id = 0;
+        public static int UserId = 0;
+
+        public static int AccountId = 0;
     }
 }
