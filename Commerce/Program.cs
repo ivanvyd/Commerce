@@ -1,4 +1,5 @@
-﻿using Commerce.Business.Services;
+﻿using Commerce.Business;
+using Commerce.Business.Services;
 using Commerce.Global;
 using Interview.DataAccess;
 using System;
@@ -10,8 +11,8 @@ namespace Commerce
     {
         static void Main(string[] args)
         {
-            var userService = new UserService();
-            var accountService = new AccountService();
+            IUserService userService = new UserService();
+            IAccountService accountService = new AccountService();
 
             var user = DbContext.Users.FirstOrDefault();
             var bonusAccount = DbContext.Accounts.FirstOrDefault(it => it.Id == 0 && it.User.Id == user.Id);
