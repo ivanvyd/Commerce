@@ -8,15 +8,22 @@ namespace Commerce.Business.Services
 {
     public class AccountService : IAccountService
     {
+        private readonly DbContext dbContext;
+
+        public AccountService(DbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
         public string GetBalance(int userId, int accountId)
         {
-            var user = DbContext.Users.FirstOrDefault(it => it.Id == userId);
+            var user = dbContext.Users.FirstOrDefault(it => it.Id == userId);
             if (user == null)
             {
                 throw new NotFoundException();
             }
 
-            var acc = DbContext.Accounts.FirstOrDefault(it => it.User.Id == userId && it.Id == accountId);
+            var acc = dbContext.Accounts.FirstOrDefault(it => it.User.Id == userId && it.Id == accountId);
             if (acc == null)
             {
                 throw new NotFoundException();
@@ -27,13 +34,13 @@ namespace Commerce.Business.Services
 
         public void TopUpAccount(int userId, int accountId, double value)
         {
-            var user = DbContext.Users.FirstOrDefault(it => it.Id == userId);
+            var user = dbContext.Users.FirstOrDefault(it => it.Id == userId);
             if (user == null)
             {
                 throw new NotFoundException();
             }
 
-            var acc = DbContext.Accounts.FirstOrDefault(it => it.User.Id == userId && it.Id == accountId);
+            var acc = dbContext.Accounts.FirstOrDefault(it => it.User.Id == userId && it.Id == accountId);
             if (acc == null)
             {
                 throw new NotFoundException();
@@ -44,13 +51,13 @@ namespace Commerce.Business.Services
 
         public void ReduceAccount(int userId, int accountId, double value)
         {
-            var user = DbContext.Users.FirstOrDefault(it => it.Id == userId);
+            var user = dbContext.Users.FirstOrDefault(it => it.Id == userId);
             if (user == null)
             {
                 throw new NotFoundException();
             }
 
-            var acc = DbContext.Accounts.FirstOrDefault(it => it.User.Id == userId && it.Id == accountId);
+            var acc = dbContext.Accounts.FirstOrDefault(it => it.User.Id == userId && it.Id == accountId);
             if (acc == null)
             {
                 throw new NotFoundException();
@@ -69,13 +76,13 @@ namespace Commerce.Business.Services
 
         public decimal GetBonus(int userId, int accountId, double value)
         {
-            var user = DbContext.Users.FirstOrDefault(it => it.Id == userId);
+            var user = dbContext.Users.FirstOrDefault(it => it.Id == userId);
             if (user == null)
             {
                 throw new NotFoundException();
             }
 
-            var acc = DbContext.Accounts.FirstOrDefault(it => it.User.Id == userId && it.Id == accountId);
+            var acc = dbContext.Accounts.FirstOrDefault(it => it.User.Id == userId && it.Id == accountId);
             if (acc == null)
             {
                 throw new NotFoundException();

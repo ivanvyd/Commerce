@@ -11,12 +11,13 @@ namespace Commerce
     {
         static void Main(string[] args)
         {
-            IUserService userService = new UserService();
-            IAccountService accountService = new AccountService();
+            var dbContext = new DbContext();
+            IUserService userService = new UserService(dbContext);
+            IAccountService accountService = new AccountService(dbContext);
 
-            var user = DbContext.Users.FirstOrDefault();
-            var bonusAccount = DbContext.Accounts.FirstOrDefault(it => it.Id == 0 && it.User.Id == user.Id);
-            var accountEUR = DbContext.Accounts.FirstOrDefault(it => it.Currency == Currency.EUR && it.User.Id == user.Id);
+            var user = dbContext.Users.FirstOrDefault();
+            var bonusAccount = dbContext.Accounts.FirstOrDefault(it => it.Id == 0 && it.User.Id == user.Id);
+            var accountEUR = dbContext.Accounts.FirstOrDefault(it => it.Currency == Currency.EUR && it.User.Id == user.Id);
 
             Console.WriteLine(">> Get user's info\n");
             Console.WriteLine(userService.GetUserInfo(user.Id));
